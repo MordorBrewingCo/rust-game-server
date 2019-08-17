@@ -18,7 +18,11 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "web" {
+data "template_file" "user_data" {
+  template = "${file("templates/user_data.tpl")}"
+
+resource "aws_instance" "rust" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.medium"
+  user_data = "${data.template_file.user_data.rendered}"
 }
