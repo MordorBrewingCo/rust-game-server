@@ -3,14 +3,9 @@
 # Do not set the set -x flag
 # This will cause passwords to be printed to the console and log files.
 
-HOSTNAME="$(hostname)"
-ARTIFACTORY='${artifactory-url}'
-EC2_USER='ec2-user'
-
 # USER-DATA SHIPPED TO LOGS
 exec > >(tee /var/log/user-data.log|logger -t user-data ) 2>&1
 echo "Running user_data script ($0)"
-echo "  as $(whoami) in $PROJ_ENV environment"
 date '+%Y-%m-%d %H:%M:%S'
 
 umask 022
@@ -20,8 +15,6 @@ sudo apt-get install curl -y
 
 # INSTALLING DOCKER
 curl -fsSL https://get.docker.com/ | sh
-
-# CREATING
 
 # CONFIGURE FIREWALL USING UFW
 sudo apt-get install ufw -y
