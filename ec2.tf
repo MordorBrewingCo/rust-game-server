@@ -25,4 +25,5 @@ resource "aws_instance" "rust" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.medium"
   user_data = "${data.template_file.user_data.rendered}"
+  availability_zone = "${var.availability_zone}"
 }
