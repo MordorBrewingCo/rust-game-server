@@ -1,6 +1,6 @@
-provider "aws" {
+/*provider "aws" {
   region = "us-west-2"
-}
+}*/
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -28,4 +28,3 @@ resource "aws_instance" "rust" {
   user_data         = data.template_file.user_data.rendered
   availability_zone = var.availability_zone
 }
-
