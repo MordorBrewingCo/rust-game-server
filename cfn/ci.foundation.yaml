@@ -69,14 +69,17 @@ Resources:
             Action:
             - ec2:*
             Resource: '*'
-  myaccesskey:
+  MyAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
       UserName:
         !Ref CiUser
 
-
 Outputs:
   TableName:
     Value: !Ref 'TerraformLockTable'
     Description: provides locking for Terraform state file
+  AccessKeyID:
+    Value: !Ref 'MyAccessKey'
+  AccessKeySecret:
+  Value: !GetAtt MyAccessKey.SecretAccessKey
