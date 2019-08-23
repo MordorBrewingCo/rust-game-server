@@ -2,9 +2,10 @@
 
 terraform {
   backend "s3" {
-    bucket         = "${var.backend_bucket_name}"
-    key            = "${var.tf_state_key}"
-    region         = "${var.region}"
-    dynamodb_table = "${var.backend_table_name}"
+    bucket         = "rust-fragtopia-us-west-2-389684724582-terraform"
+    encrypt        = true
+    key            = rust-server.tfstate
+    region         = us-west-2
+    dynamodb_table = rust-fragtopia-locktable
   }
 }
