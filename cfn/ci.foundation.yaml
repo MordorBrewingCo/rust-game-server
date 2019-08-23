@@ -82,4 +82,4 @@ Outputs:
   AccessKeyID:
     Value: !Ref 'MyAccessKey'
   AccessKeySecret:
-  Value: !GetAtt MyAccessKey.SecretAccessKey
+    Value: !GetAtt MyAccessKey.SecretAccessKey
