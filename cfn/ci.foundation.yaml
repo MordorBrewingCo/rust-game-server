@@ -7,7 +7,7 @@ Parameters:
     AllowedPattern: '[a-zA-Z0-9]*'
     MinLength: '1'
     MaxLength: '2048'
-    ConstraintDescription: must contain only alphanumberic characters
+    ConstraintDescription: must contain only alphanumeric characters
   HashKeyElementType:
     Description: HashType PrimaryKey Type
     Type: String
@@ -56,6 +56,27 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: !Ref 'ReadCapacityUnits'
         WriteCapacityUnits: !Ref 'WriteCapacityUnits'
+  CiUser:
+    Type: AWS::IAM::User
+    Properties:
+      Path: "/"
+      Policies:
+      - PolicyName: giveaccesstoec2only
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - ec2:*
+            Resource:
+            - *
+  myaccesskey:
+    Type: AWS::IAM::AccessKey
+    Properties:
+      UserName:
+        !Ref CiUser
+
+
 Outputs:
   TableName:
     Value: !Ref 'TerraformLockTable'
