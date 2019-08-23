@@ -68,8 +68,7 @@ Resources:
           - Effect: Allow
             Action:
             - ec2:*
-            Resource:
-            - *
+            Resource: *
   myaccesskey:
     Type: AWS::IAM::AccessKey
     Properties:
