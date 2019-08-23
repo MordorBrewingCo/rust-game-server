@@ -3,7 +3,7 @@ variable "availability_zone" {
   default = "us-west-2a"
 }
 
-variable "region" {
+variable "aws_region" {
   type    = string
   default = "us-west-2"
 }
@@ -22,4 +22,3 @@ variable "backend_table_name" {
   type    = string
   default = "rust-fragtopia-locktable"
 }
-
