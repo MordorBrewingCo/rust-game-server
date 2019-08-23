@@ -6,6 +6,6 @@ terraform {
     encrypt        = true
     key            = rust-server.tfstate
     region         = us-west-2
-    dynamodb_table = rust-fragtopia-locktable
+    dynamodb_table = "rust-fragtopia-locktable"
   }
 }
