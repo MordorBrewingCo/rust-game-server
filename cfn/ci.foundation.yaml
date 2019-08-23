@@ -37,7 +37,7 @@ Resources:
       BucketName:
         Fn::Join:
           - ""
-          - - "eap-int-null-test-inf-"
+          - - "rust-fragtopia-"
             - Ref: "AWS::Region"
             - "-"
             - Ref: "AWS::AccountId"
@@ -46,7 +46,7 @@ Resources:
   TerraformLockTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: 'eap-int-null-test-terraform-locktable'
+      TableName: 'rust-fragtopia-locktable'
       AttributeDefinitions:
         - AttributeName: !Ref 'HashKeyElementName'
           AttributeType: !Ref 'HashKeyElementType'
