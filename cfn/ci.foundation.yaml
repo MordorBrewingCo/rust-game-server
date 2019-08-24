@@ -69,6 +69,20 @@ Resources:
             Action:
             - ec2:*
             Resource: '*'
+          - Effect: Allow
+            Action: s3:ListBucket
+            Resource: arn:aws:s3:::mybucket
+          - Effect: Allow
+            Action:
+            - s3:GetObject
+            - s3:PutObject
+            Resource: !GetAtt TerraformStateS3Bucket.Arn
+          - Effect: Allow
+            Action:
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:DeleteItem
+            Resource: !GetAtt TerraformLockTable.Arn
   MyAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
