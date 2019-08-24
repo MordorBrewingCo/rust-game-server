@@ -95,6 +95,28 @@ Resources:
             - dynamodb:PutItem
             - dynamodb:DeleteItem
             Resource: !GetAtt TerraformLockTable.Arn
+          - Effect: Allow
+            Action:
+            - iam:CreateRole
+            - iam:CreateRole
+            - iam:PutRolePolicy
+            - iam:CreateInstanceProfile
+            - iam:AddRoleToInstanceProfile
+            - iam:AttachRolePolicy
+            Resource:
+               Fn::Join:
+                  - ""
+                  -
+                    - "arn:aws:ec2:"
+                    -
+                      Ref: "AWS::Region"
+                    - ":"
+                    -
+                      Ref: "AWS::AccountId"
+                    - ":instance/*"
+            Condition:
+              StringEquals:
+                ec2:ResourceTag/Owner: Rust
   MyAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
