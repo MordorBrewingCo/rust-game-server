@@ -6,12 +6,12 @@ before_install:
 #These two steps will effectively validate our terraform and output a list of any changes to be made to our infrastructure
 script:
   - ./terraform init
-  - ./terraform plan
+  - ./terraform validate
 
 deploy:
   provider: script
   script:
-    - ./terraform apply
+    - ./terraform apply -auto-approve
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   skip_cleanup: true
