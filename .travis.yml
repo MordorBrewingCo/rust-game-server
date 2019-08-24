@@ -15,6 +15,6 @@ deploy:
 #   - ./terraform destroy -auto-approve
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  skip_cleanup: true
+  skip_cleanup: false
   on:
     branch: master
