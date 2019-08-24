@@ -16,6 +16,7 @@ resource "aws_iam_role" "ec2_describe_volumes_role" {
   ]
 }
 EOF
+}
 
 resource "aws_iam_instance_profile" "ec2_describe_volumes_profile" {
   name = "ec2_describe_volumes_profile"
