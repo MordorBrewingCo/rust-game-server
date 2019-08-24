@@ -98,11 +98,17 @@ Resources:
           - Effect: Allow
             Action:
             - iam:CreateRole
-            - iam:CreateRole
             - iam:PutRolePolicy
             - iam:CreateInstanceProfile
+            - iam:GetRole
+            Resource: '*'
+          - Effect: Allow
+            Action:
+            - iam:PutRolePolicy
             - iam:AddRoleToInstanceProfile
             - iam:AttachRolePolicy
+            - iam:UpdateRole
+            - iam:DetachRolePolicy
             Resource:
                Fn::Join:
                   - ""
