@@ -10,7 +10,9 @@ date '+%Y-%m-%d %H:%M:%S'
 
 umask 022
 
-# INSTALLING CURL
+# INSTALLING UTILITIES
+sudo apt-get update
+sudo apt-get install awscli -y
 sudo apt-get install curl -y
 
 # logic to attach EBS volume
