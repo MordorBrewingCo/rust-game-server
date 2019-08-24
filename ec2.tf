@@ -29,4 +29,10 @@ resource "aws_instance" "rust" {
   vpc_security_group_ids = ["${aws_security_group.rust.id}"]
   user_data         = data.template_file.user_data.rendered
   availability_zone = var.availability_zone
+
+  # Copies the configs.d folder to /etc/configs.d
+provisioner "file" {
+  source      = "templates/rust.env"
+  destination = "/rust.env"
+}
 }
