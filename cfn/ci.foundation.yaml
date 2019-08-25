@@ -107,6 +107,7 @@ Resources:
             - iam:RemoveRoleFromInstanceProfile
             - iam:DeleteRolePolicy
             - iam:DeleteInstanceProfile
+            - iam:DeleteRole
             Resource: '*'
           - Effect: Allow
             Action:
