@@ -108,28 +108,12 @@ Resources:
             - iam:DeleteRolePolicy
             - iam:DeleteInstanceProfile
             - iam:DeleteRole
-            Resource: '*'
-          - Effect: Allow
-            Action:
             - iam:PutRolePolicy
             - iam:AddRoleToInstanceProfile
             - iam:AttachRolePolicy
             - iam:UpdateRole
             - iam:DetachRolePolicy
-            Resource:
-               Fn::Join:
-                  - ""
-                  -
-                    - "arn:aws:ec2:"
-                    -
-                      Ref: "AWS::Region"
-                    - ":"
-                    -
-                      Ref: "AWS::AccountId"
-                    - ":instance/*"
-            Condition:
-              StringEquals:
-                ec2:ResourceTag/Owner: Rust
+            Resource: '*'
   MyAccessKey:
     Type: AWS::IAM::AccessKey
     Properties:
