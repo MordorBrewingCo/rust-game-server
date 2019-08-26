@@ -27,6 +27,7 @@ resource "aws_instance" "rust" {
     device_name = "/dev/sdh"
     volume_size = 10
     volume_type = "gp2"
+    delete_on_termination = false
   }
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
