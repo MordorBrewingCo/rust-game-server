@@ -18,9 +18,9 @@ resource "aws_iam_role" "ec2_describe_volumes_role" {
 EOF
 }
 
-resource "aws_iam_instance_profile" "ec2_describe_volumes_profile" {
-  name = "ec2_describe_volumes_profile"
-  role = "${aws_iam_role.ec2_describe_volumes_role.name}"
+resource "aws_iam_instance_profile" "test_profile" {
+  name  = "ec2_describe_volumes_profile"
+  roles = ["${aws_iam_role.ec2_describe_volumes_role.name}"]
 }
 
 resource "aws_iam_role_policy" "ec2_describe_volumes_policy" {
