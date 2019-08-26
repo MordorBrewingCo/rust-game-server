@@ -29,6 +29,11 @@ resource "aws_instance" "rust" {
     volume_type = "gp2"
     delete_on_termination = false
   }
+  # Copies the rust.env file for the Docker container to / for use
+  provisioner "file" {
+    source      = "templates/rust.env"
+    destination = "/rust.env"
+  }
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
   iam_instance_profile = "${aws_iam_instance_profile.ec2_describe_volumes_profile.name}"
@@ -39,10 +44,4 @@ resource "aws_instance" "rust" {
   tags = {
   Owner = "Rust"
   }
-
-  # Copies the configs.d folder to /etc/configs.d
-provisioner "file" {
-  source      = "templates/rust.env"
-  destination = "/rust.env"
-}
 }
