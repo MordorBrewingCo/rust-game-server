@@ -23,6 +23,11 @@ data "template_file" "user_data" {
 }
 
 resource "aws_instance" "rust" {
+  ebs_block_device {
+    device_name = "/dev/sdh"
+    volume_size = 10
+    volume_type = "gp2"
+  }
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
   iam_instance_profile = "${aws_iam_instance_profile.ec2_describe_volumes_profile.name}"
