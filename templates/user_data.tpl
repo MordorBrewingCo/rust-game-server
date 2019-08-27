@@ -70,6 +70,19 @@ sudo ufw allow 28016
 sudo ufw allow 8080
 sudo ufw enable
 
+cat > /rust.env <<- "EOF"
+RUST_SERVER_STARTUP_ARGUMENTS="-batchmode -load -logfile /dev/stdout +server.secure 1"
+RUST_SERVER_IDENTITY="Fragtopia"
+RUST_SERVER_SEED="4983"
+RUST_SERVER_NAME="Fragtopia Rust"
+RUST_SERVER_DESCRIPTION="Fragtopia Rust"
+RUST_RCON_PASSWORD="SuperSecurePassword"
+
+RUST_SERVER_WORLDSIZE="2000"
+RUST_SERVER_MAXPLAYERS="100"
+RUST_SERVER_DESCRIPTION="Fragtopia: Carebear-ish"
+EOF
+
 # START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
 #docker run --name rust-server didstopia/rust-server
 docker run --name rust-server -d -p 28015:28015 -p 28015:28015/udp -p 28016:28016 -p 8080:8080 -v /rust:/steamcmd/rust --env-file /rust.env didstopia/rust-server
