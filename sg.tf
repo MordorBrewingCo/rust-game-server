@@ -23,7 +23,7 @@ resource "aws_security_group" "rust" {
     from_port = 8080
     to_port = 8080
     protocol = "tcp"
-    cidr_blocks = ["173.84.0.0/14", "98.10.111.0/25"]
+    cidr_blocks = ["173.84.0.0/14", "98.10.111.0/25", "206.251.217.0/24"]
   }
   egress {
     from_port = 0
