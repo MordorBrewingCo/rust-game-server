@@ -120,34 +120,6 @@ Resources:
     Properties:
       UserName:
         !Ref CiUser
-  MyKmsKey:
-    Type: AWS::KMS::Key
-    Properties:
-      Description: "Rust CMK"
-      KeyPolicy:
-        Version: "2012-10-17"
-        Id: "rust-key-1"
-        Statement:
-         -
-            Sid: "Enable IAM User Permissions"
-            Effect: "Allow"
-            Principal:
-              AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
-            Action: "kms:*"
-            Resource: "*"
-         -
-            Sid: "Allow use of the key"
-            Effect: "Allow"
-            Principal:
-              AWS: !GetAtt CiUser.Arn
-            Action:
-              - "kms:DescribeKey"
-              - "kms:Encrypt"
-              - "kms:Decrypt"
-              - "kms:ReEncrypt*"
-              - "kms:GenerateDataKey"
-              - "kms:GenerateDataKeyWithoutPlaintext"
-            Resource: "*"
 
 Outputs:
   TableName:
