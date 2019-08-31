@@ -22,3 +22,8 @@ variable "backend_table_name" {
   type    = string
   default = "rust-fragtopia-locktable"
 }
+
+variable "ssm_parameter_rcon_pass_path" {
+  type    = string
+  default = "/rust"
+}

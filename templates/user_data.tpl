@@ -11,7 +11,9 @@ date '+%Y-%m-%d %H:%M:%S'
 umask 022
 
 # INSTALLING UTILITIES
+sudo add-apt-repository ppa:eugenesan/ppa
 sudo apt-get update
+apt-get install jq -y
 sudo apt-get install awscli -y
 sudo apt-get install curl -y
 
@@ -20,6 +22,7 @@ EC2_INSTANCE_ID=$(wget -q -O - http://169.254.169.254/latest/meta-data/instance-
 EC2_AVAIL_ZONE=$(wget -q -O - http://169.254.169.254/latest/meta-data/placement/availability-zone || die \"wget availability-zone has failed: $?\")
 EC2_REGION="`echo \"$EC2_AVAIL_ZONE\" | sed -e 's:\([0-9][0-9]*\)[a-z]*\$:\\1:'`"
 DIRECTORY=/steamcmd/rust
+MYKEY=rust
 
 #############
 # EBS VOLUME
@@ -76,12 +79,16 @@ RUST_SERVER_IDENTITY="Fragtopia"
 RUST_SERVER_SEED="4983"
 RUST_SERVER_NAME="Fragtopia Rust"
 RUST_SERVER_DESCRIPTION="Fragtopia Rust"
-RUST_RCON_PASSWORD="SuperSecurePassword"
+RUST_RCON_PASSWORD="ReplaceMe!"
 
 RUST_SERVER_WORLDSIZE="2000"
 RUST_SERVER_MAXPLAYERS="100"
 RUST_SERVER_DESCRIPTION="Fragtopia: Carebear-ish"
 EOF
+
+# RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE RUST.ENV
+export PASSWORD=$(aws ssm get-parameter --name ${ssm_parameter_rcon_pass_path} --with-decryption | jq -r ".Parameter.Value")
+sed "s/ReplaceMe!/$PASSWORD/g" /rust.env
 
 # START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
 #docker run --name rust-server didstopia/rust-server
