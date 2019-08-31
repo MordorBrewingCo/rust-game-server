@@ -49,13 +49,31 @@ done
 echo 'EBS volume attached!'
 
 # Format /dev/xvdh if it does not contain a partition yet
+
 if [ "$(file -b -s /dev/xvdh)" == "data" ]; then
   mkfs -t ext4 /dev/xvdh
 fi
 
+
 # Create the Rust directory on our EC2 instance if it doesn't exist
+
 if [ ! -d "$DIRECTORY" ]; then
   mkdir -p $DIRECTORY
+fi
+
+
+# mount up the persistent filesystem
+
+if grep -qs "$DIRECTORY" /proc/mounts; then
+  echo "Persistent filesystem already mounted."
+else
+  echo "Persistent filesystem not mounted."
+  mount /dev/xvdh "$DIRECTORY"
+  if [ $? -eq 0 ]; then
+   echo "Mount success!"
+  else
+   echo "Something went wrong with the mount..."
+  fi
 fi
 
 # INSTALLING DOCKER
@@ -89,7 +107,7 @@ EOF
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE RUST.ENV
 export PASSWORD=$(aws ssm get-parameter --region $EC2_REGION --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
-sed "s/ReplaceMe!/$PASSWORD/g" /rust.env
+sed -i "s/ReplaceMe!/$PASSWORD/g" /rust.env
 
 # START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
 #docker run --name rust-server didstopia/rust-server
