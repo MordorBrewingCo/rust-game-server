@@ -21,7 +21,7 @@ data "aws_ami" "ubuntu" {
 data "template_file" "user_data" {
   template = file("templates/user_data.tpl")
   vars = {
-    ssm_parameter_path = var.ssm_parameter_rcon_pass_path
+    ssm_parameter_path = "${var.ssm_parameter_rcon_pass_path}"
   }
 }
 

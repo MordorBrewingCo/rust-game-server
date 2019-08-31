@@ -87,7 +87,7 @@ RUST_SERVER_DESCRIPTION="Fragtopia: Carebear-ish"
 EOF
 
 # RETRIEVE RCON PASS VALUE FROM SSM PARAMETER STORE AND UPDATE RUST.ENV
-export PASSWORD=$(aws ssm get-parameter --name ${ssm_parameter_rcon_pass_path} --with-decryption | jq -r ".Parameter.Value")
+export PASSWORD=$(aws ssm get-parameter --name ${ssm_parameter_path} --with-decryption | jq -r ".Parameter.Value")
 sed "s/ReplaceMe!/$PASSWORD/g" /rust.env
 
 # START THE RUST CONTAINER.  DOWNLOADS LATEST RUST-SERVER IMAGE FROM DOCKER HUB
