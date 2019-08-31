@@ -39,7 +39,9 @@ resource "aws_iam_role_policy" "ec2_describe_volumes_policy" {
         "kms:Decrypt",
         "kms:ReEncrypt*",
         "kms:GenerateDataKey",
-        "kms:GenerateDataKeyWithoutPlaintext"
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "ssm:DescribeParameters",
+        "ssm:DescribeParameters"
       ],
       "Effect": "Allow",
       "Resource": "*"
