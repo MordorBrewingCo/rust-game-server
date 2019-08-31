@@ -14,7 +14,8 @@ umask 022
 sudo add-apt-repository ppa:eugenesan/ppa
 sudo apt-get update
 apt-get install jq -y
-sudo apt-get install awscli -y
+sudo apt install python3-pip -y
+sudo pip3 install awscli --upgrade
 sudo apt-get install curl -y
 
 # logic to attach EBS volume
