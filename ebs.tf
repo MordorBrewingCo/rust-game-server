@@ -1,6 +1,4 @@
 resource "aws_ebs_volume" "rust_persistent" {
-  volume_type = "gp2"
-  delete_on_termination = false
   availability_zone = var.availability_zone
   size              = 10
 }
