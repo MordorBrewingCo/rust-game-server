@@ -33,7 +33,7 @@ resource "aws_iam_role_policy" "ec2_describe_volumes_policy" {
   "Statement": [
     {
       "Action": [
-        "ec2:DescribeVolumes"
+        "ec2:DescribeVolumes",
         "kms:DescribeKey",
         "kms:Encrypt",
         "kms:Decrypt",
