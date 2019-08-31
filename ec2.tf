@@ -20,15 +20,18 @@ data "aws_ami" "ubuntu" {
 
 data "template_file" "user_data" {
   template = file("templates/user_data.tpl")
+  vars = {
+    ssm_parameter_path = var.ssm_parameter_rcon_pass_path
+  }
 }
 
 resource "aws_instance" "rust" {
-  ebs_block_device {
+/*  ebs_block_device {
     device_name = "/dev/sdh"
     volume_size = 10
     volume_type = "gp2"
     delete_on_termination = false
-  }
+  } */
   ami               = data.aws_ami.ubuntu.id
   instance_type     = "t2.medium"
   iam_instance_profile = "${aws_iam_instance_profile.ec2_describe_volumes_profile.name}"
