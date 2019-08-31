@@ -41,7 +41,7 @@ resource "aws_iam_role_policy" "ec2_describe_volumes_policy" {
         "kms:GenerateDataKey",
         "kms:GenerateDataKeyWithoutPlaintext",
         "ssm:DescribeParameters",
-        "ssm:DescribeParameters"
+        "ssm:GetParameters"
       ],
       "Effect": "Allow",
       "Resource": "*"
