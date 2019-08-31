@@ -5,7 +5,7 @@ before_install:
 
 #These two steps will effectively validate our terraform and output a list of any changes to be made to our infrastructure
 script:
-  - ./terraform init
+  - ./terraform init 
   - ./terraform validate
 
 deploy:
