@@ -12,7 +12,7 @@ deploy:
   provider: script
   script:
     - ./terraform apply -auto-approve
-//    - ./terraform destroy -auto-approve
+#    - ./terraform destroy -auto-approve
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
   skip_cleanup: true
